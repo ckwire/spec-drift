@@ -45,6 +45,13 @@ Tested against a hand-written set of spec/drawing pairs with known
 expected outcomes — see `/eval`. [Add your baseline score once you
 have one after Day 7.]
 
+## Status
+
+Working against a real document pair — Fire Station in CA (public bid documents: electrical drawings and
+Division 26 technical specifications). Test set of 18 cases built
+against real spec clauses and drawing content. Baseline scoring not
+yet run.
+
 ## License
 
 MIT — see [LICENSE](./LICENSE)

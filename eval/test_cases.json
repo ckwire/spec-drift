@@ -1,0 +1,201 @@
+{
+  "project": "Butterfield Fire Station No. 6, Morgan Hill, CA",
+  "notes": "Cases marked verify_ocr: true reference table values pulled via automated PDF text extraction (panel schedules, luminaire schedule) and should be manually confirmed against the source PDF before being treated as ground truth. Cases marked verify_ocr: false are drawn from clean prose text (spec sections, general notes) and are considered reliable as written.",
+  "cases": [
+    {
+      "id": "tc-001",
+      "type": "clean_match",
+      "spec_ref": "26240-2.2.F.3 (Sec 26 24 00, 2.2.F.3)",
+      "drawing_ref": "E6.1 Panel Schedules, MSB: A.I.C. Rating: 65,000",
+      "description": "Spec requires main breaker rated to interrupt 65,000A RMS unless drawings note otherwise. Drawing MSB schedule shows 65,000 AIC.",
+      "expected_result": "no_conflict",
+      "expected_citation": ["26240-2.2.F.3", "E6.1 MSB A.I.C. Rating"],
+      "verify_ocr": true,
+      "notes": "Confirm '65,000' reads correctly in the MSB load calculation block on E6.1."
+    },
+    {
+      "id": "tc-002",
+      "type": "clean_match",
+      "spec_ref": "26240-2.2.F.5 (Sec 26 24 00, 2.2.F.5)",
+      "drawing_ref": "E6.1 Panel Schedules, Panels A/B/C: A.I.C. Rating: 22kAIC",
+      "description": "Spec requires branch breakers minimum 10,000 AIC at 120/208V. Panels A, B, C show 22kAIC, which exceeds the minimum.",
+      "expected_result": "no_conflict",
+      "expected_citation": ["26240-2.2.F.5", "E6.1 Panel A/B/C A.I.C. Rating"],
+      "verify_ocr": true,
+      "notes": "This case specifically tests whether the system correctly treats 'exceeds minimum' as compliant rather than flagging a numeric mismatch against the spec's '10,000' figure."
+    },
+    {
+      "id": "tc-003",
+      "type": "clean_match",
+      "spec_ref": "26240-2.2.C.2 and 26240-2.2.C.5 (Sec 26 24 00)",
+      "drawing_ref": "E5.1 Power Single Line Diagram, UFER ground: #4/0 G.",
+      "description": "Spec requires grounding electrode conductor minimum #4/0 bare stranded copper. Drawing E5.1 shows #4/0 G. at the UFER connection.",
+      "expected_result": "no_conflict",
+      "expected_citation": ["26240-2.2.C.2", "E5.1 UFER #4/0 G."],
+      "verify_ocr": false
+    },
+    {
+      "id": "tc-004",
+      "type": "unverifiable_needs_more_context",
+      "spec_ref": "26240-2.2.D.22 (Sec 26 24 00, 2.2.D.22)",
+      "drawing_ref": "E6.1 Panel Schedules / E5.1 Single Line",
+      "description": "Spec requires the main switchboard or a distribution panel to include reserved, labeled 'EV Capable' space per CALGreen. No 'EV Capable' label appears in the extracted panel schedule or single-line text.",
+      "expected_result": "conflict",
+      "expected_citation": ["26240-2.2.D.22", "E6.1 Panel Schedules (no EV Capable label present)"],
+      "verify_ocr": true,
+      "notes": "High-value case: this is a real code-driven requirement that is easy to miss. Confirm no 'EV Capable' labeling appears anywhere on E6.1 or E5.1 before finalizing as a true conflict -- it's possible it's labeled on a panel schedule 'SPACE' row not captured cleanly in extraction."
+    },
+    {
+      "id": "tc-005",
+      "type": "unverifiable_needs_more_context",
+      "spec_ref": "26240-2.2.E.11 (Sec 26 24 00, 2.2.E.11)",
+      "drawing_ref": "N/A -- requires submittal/as-built comparison",
+      "description": "Spec requires panel breaker arrangement to exactly match the panel schedule, with no deviations permitted. This cannot be verified from the bid-set drawings alone since it requires comparing an installed/submitted panel against the schedule.",
+      "expected_result": "cannot_verify",
+      "expected_citation": ["26240-2.2.E.11"],
+      "verify_ocr": false,
+      "notes": "Deliberately included to test whether the system correctly declines to guess rather than fabricating a conflict or false clean bill of health."
+    },
+    {
+      "id": "tc-006",
+      "type": "potential_conflict",
+      "spec_ref": "26510-2.8.B.2 (Sec 26 51 01, 2.8.B.2)",
+      "drawing_ref": "E0.3 Luminaire Schedule, Type BF1 (walkway bollard, exterior)",
+      "description": "Spec default requires 3000K CCT for exterior luminaires unless the Luminaire Schedule specifies otherwise. Confirm the actual CCT listed for exterior-mounted types (BF1, BG1, BH1, BC1-3, BE1-3, BD1) on E0.3 against this default.",
+      "expected_result": "conflict_if_schedule_shows_3500K_without_override_note",
+      "expected_citation": ["26510-2.8.B.2", "E0.3 Luminaire Schedule CCT column for exterior types"],
+      "verify_ocr": true,
+      "notes": "IMPORTANT: my extraction of the Luminaire Schedule CCT column is unreliable for this specific check -- verify actual CCT values per fixture type directly against the PDF before treating this as a real conflict. The spec clause 26510-2.1.A means a schedule value that differs from the 3000K default is NOT automatically a conflict -- it just needs to be an intentional schedule entry, not a spec violation. Treat this case as a template for a real check, not a confirmed finding."
+    },
+    {
+      "id": "tc-007",
+      "type": "clean_match",
+      "spec_ref": "26510-2.2.C.1 (Sec 26 51 01, 2.2.C.1)",
+      "drawing_ref": "E0.3/E0.4 Luminaire Schedule, all types listed at 3500K",
+      "description": "Spec allows only 2700K, 3000K, or 3500K CCT (within tolerance bands). All schedule entries reviewed show 3500K, which is an allowed value.",
+      "expected_result": "no_conflict",
+      "expected_citation": ["26510-2.2.C.1", "E0.3/E0.4 Luminaire Schedule Light Source column"],
+      "verify_ocr": true
+    },
+    {
+      "id": "tc-008",
+      "type": "needs_additional_source",
+      "spec_ref": "26510-3.2.B.1 (Sec 26 51 01, 3.2.B.1)",
+      "drawing_ref": "E2.1 Floor Plan - Lighting / Architectural fire-rating plan (not in this document set)",
+      "description": "Spec requires fire-rated enclosures for luminaires installed in fire-rated ceilings/walls. Confirming this requires cross-referencing which walls/ceilings on E2.1 are fire-rated assemblies, which is architectural information not present in the electrical set.",
+      "expected_result": "cannot_verify",
+      "expected_citation": ["26510-3.2.B.1"],
+      "verify_ocr": false,
+      "notes": "Good negative-control case: tests that the system flags a genuine cross-discipline gap rather than guessing."
+    },
+    {
+      "id": "tc-009",
+      "type": "no_conflict_check",
+      "spec_ref": "26240-2.2.G.4 (Sec 26 24 00, 2.2.G.4)",
+      "drawing_ref": "E5.1 Power Single Line, Isolation Transformer 'TX-ES': 480V Delta / 208V Wye",
+      "description": "Spec requires general distribution transformers set for 120/208V secondary. The TX-ES transformer on E5.1 is a 480V-to-208V isolation transformer for the battery storage system, a different application than the general distribution transformer this spec clause targets.",
+      "expected_result": "not_applicable",
+      "expected_citation": ["26240-2.2.G.4", "E5.1 TX-ES nameplate: 480V Delta / 208V Wye"],
+      "verify_ocr": false,
+      "notes": "Good test of scope discrimination: the system should recognize this spec clause targets a different transformer than TX-ES, not flag a false conflict on voltage."
+    },
+    {
+      "id": "tc-010",
+      "type": "plausible_conflict_needs_field_check",
+      "spec_ref": "26510-3.1.D (Sec 26 51 01, 3.1.D)",
+      "drawing_ref": "E3.2 Floor Plan - Mechanical Power / E2.1 Floor Plan - Lighting, Elec 127 and Workshop 123",
+      "description": "Spec requires 7'-0\" minimum mounting height for luminaires in mechanical/unfinished spaces. Confirm mounting heights noted for fixtures in ELEC 127 and WORKSHOP 123 against this minimum.",
+      "expected_result": "needs_verification",
+      "expected_citation": ["26510-3.1.D", "E2.1 mounting height notes for ELEC 127/WORKSHOP 123 fixtures"],
+      "verify_ocr": true,
+      "notes": "Template case -- requires pulling the specific mounting-height callout numbers for fixtures in these two rooms from E2.1 sheet notes and comparing to 7'-0\"."
+    },
+    {
+      "id": "tc-011",
+      "type": "clean_match",
+      "spec_ref": "26510-2.10.C.2 (Sec 26 51 01, 2.10.C.2)",
+      "drawing_ref": "E0.4 Luminaire Schedule, Type EX1/EX2 (exit signs)",
+      "description": "Spec requires exit sign letters 6 inches high, 3/4 inch stroke, green. Confirm EX1/EX2 cut sheet description on E0.4 matches these dimensions.",
+      "expected_result": "needs_verification",
+      "expected_citation": ["26510-2.10.C.2", "E0.4 Type EX1/EX2 description"],
+      "verify_ocr": true,
+      "notes": "The E0.4 description text for EX1 references 'chevron directional indicators' and standard factory frame color but the extraction did not clearly show letter height/stroke -- verify against manufacturer cut sheet reference (Evenlite AUR-1) if needed."
+    },
+    {
+      "id": "tc-012",
+      "type": "no_conflict_check",
+      "spec_ref": "26240-2.2.D.3 (Sec 26 24 00, 2.2.D.3)",
+      "drawing_ref": "E5.1 / E6.1, Main Switchboard 'MSB' 600A/1600A, 120/208V, 3-phase, 4W, NEMA 1",
+      "description": "Spec requires switchboard to be NEMA 1 (indoor) or NEMA 3R (outdoor). MSB is labeled NEMA 1, consistent with an indoor Elec 127 location.",
+      "expected_result": "no_conflict",
+      "expected_citation": ["26240-2.2.D.3", "E5.1 MSB NEMA 1 label"],
+      "verify_ocr": false
+    },
+    {
+      "id": "tc-013",
+      "type": "tricky_no_conflict",
+      "spec_ref": "26510-2.1.A (Sec 26 51 01, 2.1.A)",
+      "drawing_ref": "E0.3/E0.4 Luminaire Schedule vs. spec CCT defaults",
+      "description": "Spec states that where the Luminaire Schedule and spec text conflict, the more stringent requirement governs -- meaning a schedule entry that differs from the 3000K/3500K default in 26510-2.8.B.2 is not automatically a violation. Tests whether the system correctly applies this precedence rule instead of flagging every schedule deviation as a conflict.",
+      "expected_result": "no_conflict (schedule governs per precedence clause, not a violation)",
+      "expected_citation": ["26510-2.1.A", "26510-2.8.B.2"],
+      "verify_ocr": false,
+      "notes": "This is a deliberately tricky case -- the 'right' answer depends on correctly reading the precedence clause, not just comparing two numbers."
+    },
+    {
+      "id": "tc-014",
+      "type": "clean_match",
+      "spec_ref": "26510-3.3.D.7 (Sec 26 51 01, 3.3.D.7)",
+      "drawing_ref": "E2.1 Sheet Notes, Exterior Lighting Override Switches list (S1-S11)",
+      "description": "Spec requires exterior relays set for astro-on 30 min before sunset at lat 37.5N/long 122W. E2.1 sheet note 15 lists override switches for exterior circuits (App Bay, Pole Lt, Bollard, Flag Pole, Sign) consistent with astro-dial exterior control described in spec.",
+      "expected_result": "no_conflict",
+      "expected_citation": ["26510-3.3.D.7", "E2.1 Sheet Numbered Note 15"],
+      "verify_ocr": false,
+      "notes": "This case checks for the presence of consistent exterior lighting control infrastructure, not the exact astro-dial timing parameters, which aren't independently shown on E2.1."
+    },
+    {
+      "id": "tc-015",
+      "type": "missed_requirement_check",
+      "spec_ref": "26510-2.10.D.2 (Sec 26 51 01, 2.10.D.2)",
+      "drawing_ref": "E5.2 Control Diagrams / E2.1 Floor Plan - Lighting",
+      "description": "Spec requires a UL 924 listed relay providing a 15-second diagnostic test hold for emergency-designated lamps on switched circuits. Check whether E5.2 control diagrams or E2.1 notes reference this relay/feature for the emergency (EM) luminaires shown on E2.1 (types AH1E, AN1 tagged 'EM').",
+      "expected_result": "needs_verification",
+      "expected_citation": ["26510-2.10.D.2", "E5.2 Control Diagrams", "E2.1 EM-tagged luminaires"],
+      "verify_ocr": true,
+      "notes": "E5.2 control diagrams in the extracted set cover ring-down alert, room control, and relay panel/timeclock wiring -- did not clearly show a UL 924 relay detail. May be a genuine gap, or may exist on a detail sheet not fully captured in extraction. Worth a real look before flagging as conflict."
+    },
+    {
+      "id": "tc-016",
+      "type": "clean_match",
+      "spec_ref": "26240-2.2.F.6 (Sec 26 24 00, 2.2.F.6)",
+      "drawing_ref": "E3.2 Mechanical Equipment Feeder Schedule, HP/VRV-HP/RH/EWH rows",
+      "description": "Spec requires HACR-type breakers or fuses for UL-listed mechanical equipment overcurrent protection, matching equipment listing. Feeder schedule on E3.2 lists MOCP (max overcurrent protection) values per equipment row, consistent with this requirement in principle.",
+      "expected_result": "needs_verification",
+      "expected_citation": ["26240-2.2.F.6", "E3.2 Mechanical Equipment Feeder Schedule MOCP column"],
+      "verify_ocr": true,
+      "notes": "Confirming actual compliance (HACR label on each breaker) isn't visible from the schedule alone -- would need equipment submittal cut sheets. Template case for later expansion once submittals are available."
+    },
+    {
+      "id": "tc-017",
+      "type": "synthetic_conflict",
+      "spec_ref": "26240-2.2.C.2 (Sec 26 24 00, 2.2.C.2) -- SYNTHETIC EDIT",
+      "drawing_ref": "E5.1 UFER ground conductor, modified to #6 for this test case only",
+      "description": "SYNTHETIC TEST CASE: spec requires grounding electrode conductor minimum #4/0. This case artificially substitutes a #6 conductor size (not the real drawing value) to confirm the system correctly flags an undersized conductor as a conflict. Do not treat as a real finding about the Butterfield Fire Station documents.",
+      "expected_result": "conflict",
+      "expected_citation": ["26240-2.2.C.2", "[synthetic] E5.1 UFER ground shown as #6"],
+      "verify_ocr": false,
+      "notes": "This is a deliberately fabricated conflict, per the Day 2 plan, to ensure the test set includes clear positive conflict cases and isn't dominated by ambiguous or clean-match cases."
+    },
+    {
+      "id": "tc-018",
+      "type": "synthetic_conflict",
+      "spec_ref": "26510-2.2.C.1 (Sec 26 51 01, 2.2.C.1) -- SYNTHETIC EDIT",
+      "drawing_ref": "E0.3 Luminaire Schedule, Type AM1, modified to 4000K for this test case only",
+      "description": "SYNTHETIC TEST CASE: spec allows only 2700K, 3000K, or 3500K CCT. This case artificially substitutes a 4000K value (not the real schedule value, which is 3500K per extraction) to confirm the system flags a disallowed CCT value as a conflict.",
+      "expected_result": "conflict",
+      "expected_citation": ["26510-2.2.C.1", "[synthetic] E0.3 Type AM1 shown as 4000K"],
+      "verify_ocr": false,
+      "notes": "Deliberately fabricated conflict for coverage -- not a real finding."
+    }
+  ]
+}

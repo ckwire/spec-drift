@@ -1,0 +1,75 @@
+{
+  "section": "26 51 01",
+  "title": "LIGHTING",
+  "project": "Butterfield Fire Station No. 6, Morgan Hill, California",
+  "date": "03/23/23",
+  "source_pages": "PDF pages 71-86",
+  "clauses": [
+    {
+      "id": "26510-2.1.A",
+      "location": "Part 2, 2.1.A",
+      "text": "Provide luminaires as indicated in Luminaire Schedule; if conflict exists between Luminaire Schedule and Specifications, the more stringent requirement shall take precedence.",
+      "checkable_value": {"parameter": "precedence_rule", "requirement": "more stringent of Luminaire Schedule vs. Spec governs"}
+    },
+    {
+      "id": "26510-2.2.C.1",
+      "location": "Part 2, 2.2.C.1",
+      "text": "Correlated color temperature (CCT) for phosphor-coated white LEDs must have one of the following designated CCTs: 2700K (2725 +/- 145K), 3000K (3045 +/- 175K), 3500K (3465 +/- 245K).",
+      "checkable_value": {"parameter": "allowed_CCT_values", "requirement": "2700K, 3000K, or 3500K only, within stated tolerance bands"}
+    },
+    {
+      "id": "26510-2.8.B.2",
+      "location": "Part 2, 2.8.B.2",
+      "text": "3500 deg. K color temperature for interior luminaires, 3000 deg. K for exterior luminaires, unless otherwise specified.",
+      "checkable_value": {"parameter": "default_CCT_by_location", "requirement": "interior = 3500K, exterior = 3000K, unless the Luminaire Schedule specifies otherwise"}
+    },
+    {
+      "id": "26510-2.4.D",
+      "location": "Part 2, 2.4.D",
+      "text": "Non-accessible ceilings: Provide access to junction boxes, ballasts, transformers, and battery packs through luminaire apertures; no access panels in ceiling.",
+      "checkable_value": {"parameter": "non_accessible_ceiling_access_method", "requirement": "through luminaire aperture only, no separate access panels"}
+    },
+    {
+      "id": "26510-2.10.C.2",
+      "location": "Part 2, 2.10.C.2",
+      "text": "Letters shall be 20mm (3/4\") stroke, 150 mm (6\") high, with concealed knockouts for left or right arrows, brightness and evenness of illumination per code, green color.",
+      "checkable_value": {"parameter": "exit_sign_letter_height", "requirement": "6 inch high letters, 3/4 inch stroke, green"}
+    },
+    {
+      "id": "26510-2.10.D.2",
+      "location": "Part 2, 2.10.D.2",
+      "text": "Control relay shall provide automatic diagnostic test feature which shall maintain power to the emergency designated lamps for 15 seconds after the room is switched off.",
+      "checkable_value": {"parameter": "emergency_lamp_test_hold_time", "requirement": "15 seconds after switch-off"}
+    },
+    {
+      "id": "26510-3.1.D",
+      "location": "Part 3, 3.1.D",
+      "text": "Install luminaires to avoid obstructions and maximize light output, 2100 mm (7'-0\") min. mounting height.",
+      "checkable_value": {"parameter": "minimum_mounting_height_unfinished_spaces", "requirement": "7'-0\" minimum in mechanical/unfinished spaces"}
+    },
+    {
+      "id": "26510-3.2.B.1",
+      "location": "Part 3, 3.2.B.1",
+      "text": "The contractor shall verify the fire rating of the ceiling system and wall in which the luminaires are to be mounted. Where luminaires are installed in fire rated ceilings or walls, provide fire rated enclosures around and over luminaires to maintain ceiling fire rating.",
+      "checkable_value": {"parameter": "fire_rated_ceiling_luminaire_enclosure", "requirement": "fire-rated enclosure required if luminaire is in a fire-rated ceiling/wall assembly; requires cross-reference to architectural fire-rating plan, not verifiable from E-series drawings alone"}
+    },
+    {
+      "id": "26510-3.2.C.1.b",
+      "location": "Part 3, 3.2.C.1.b",
+      "text": "Luminaire weight 23 kg (50 lb) or more at each suspension point: hang directly from structure... unless the outlet box is listed for not less than the weight to be supported.",
+      "checkable_value": {"parameter": "luminaire_support_method_by_weight", "requirement": "fixtures >=50 lb must hang from structure, not just an outlet box, unless box is rated for the weight"}
+    },
+    {
+      "id": "26510-3.2.D.4",
+      "location": "Part 3, 3.2.D.4",
+      "text": "In circulation areas, wall-mounted luminaires must not project more than 100 mm (4\") from wall if mounted above 685 mm (27\") and below 2030 mm (80\").",
+      "checkable_value": {"parameter": "wall_luminaire_max_projection", "requirement": "4 inch max projection in circulation areas, in the 27in-80in AFF band"}
+    },
+    {
+      "id": "26510-3.3.D.7",
+      "location": "Part 3, 3.3.D.7",
+      "text": "Assign all exterior relays for automatic on operation with the astro-dial feature, set to 30 minutes before sunset. Latitude = 37.5 degrees North / Longitude = 122 degrees West.",
+      "checkable_value": {"parameter": "exterior_relay_astro_on_offset", "requirement": "30 min before sunset, lat 37.5N / long 122W"}
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "section": "26 24 00",
+  "title": "SERVICE AND DISTRIBUTION SYSTEM",
+  "project": "Butterfield Fire Station No. 6, Morgan Hill, California",
+  "date": "03/23/23",
+  "source_pages": "PDF pages 17-25",
+  "clauses": [
+    {
+      "id": "26240-2.2.C.2",
+      "location": "Part 2, 2.2.C.2",
+      "text": "Grounding electrode conductor: bare stranded copper type, #4/0 minimum.",
+      "checkable_value": {"parameter": "grounding_electrode_conductor_size", "requirement": "minimum #4/0"}
+    },
+    {
+      "id": "26240-2.2.C.5",
+      "location": "Part 2, 2.2.C.5",
+      "text": "Grounding electrode conductor between the grounding electrode and service equipment: Minimum #4/0.",
+      "checkable_value": {"parameter": "grounding_electrode_conductor_size", "requirement": "minimum #4/0"}
+    },
+    {
+      "id": "26240-2.2.D.2.a",
+      "location": "Part 2, 2.2.D.2.a",
+      "text": "The switchboard shall be braced for a short circuit current of 65,000 amps minimum, and for 100,000 amps when indicated on the drawings.",
+      "checkable_value": {"parameter": "main_switchboard_AIC_rating", "requirement": "minimum 65000 A, or 100000 A if drawings say so"}
+    },
+    {
+      "id": "26240-2.2.D.3",
+      "location": "Part 2, 2.2.D.3",
+      "text": "The switchboard shall be pad-mounted, self-supporting, dead-front and rear, front-operated, front-connected, distribution type. Nema 1 (indoor) or Nema 3R (outdoor). The enclosure shall be 90 inches high...",
+      "checkable_value": {"parameter": "switchboard_enclosure_type", "requirement": "NEMA 1 indoor or NEMA 3R outdoor, 90 inches high"}
+    },
+    {
+      "id": "26240-2.2.D.22",
+      "location": "Part 2, 2.2.D.22",
+      "text": "The main switchboard or distribution panel shall include space for future electric vehicle charging station connection circuit breaker(s), with a label to identify the space(s) as 'EV Capable', per California Green Building Standards Code.",
+      "checkable_value": {"parameter": "ev_capable_space_and_label", "requirement": "reserved space labeled 'EV Capable' present"}
+    },
+    {
+      "id": "26240-2.2.E.11",
+      "location": "Part 2, 2.2.E.11",
+      "text": "Panel board submittals shall include diagrams of the circuit breaker arrangements in the panels. Arrange circuit breakers in panels exactly as shown on the panel schedules in the construction documents - no deviations permitted.",
+      "checkable_value": {"parameter": "panel_breaker_arrangement", "requirement": "must match panel schedule exactly; not verifiable from bid-set drawings alone (requires as-built/submittal comparison)"}
+    },
+    {
+      "id": "26240-2.2.F.3",
+      "location": "Part 2, 2.2.F.3",
+      "text": "Main circuit breaker shall be rated to interrupt the available short circuit current - 65,000 amps RMS unless otherwise indicated on the drawings.",
+      "checkable_value": {"parameter": "main_breaker_AIC_rating", "requirement": "65000 A RMS unless drawings note otherwise"}
+    },
+    {
+      "id": "26240-2.2.F.5",
+      "location": "Part 2, 2.2.F.5",
+      "text": "Branch circuit breakers shall be rated for the amps interrupting capacity or U.L. series rated with the distribution and main circuit breakers, General Electric type THQB or equal, minimum 10,000 A.I.C for 120/208 volt.",
+      "checkable_value": {"parameter": "branch_breaker_AIC_rating", "requirement": "minimum 10000 A.I.C at 120/208V"}
+    },
+    {
+      "id": "26240-2.2.F.6",
+      "location": "Part 2, 2.2.F.6",
+      "text": "Where mechanical equipment is U.L. listed for overcurrent protection with fuses or HACR type circuit breakers, provide fuses where a fused switch is shown. Where the overcurrent protection is a circuit breaker provide HACR type.",
+      "checkable_value": {"parameter": "mechanical_equipment_overcurrent_protection_type", "requirement": "HACR breaker or fuses per equipment listing"}
+    },
+    {
+      "id": "26240-2.2.G.4",
+      "location": "Part 2, 2.2.G.4",
+      "text": "The higher voltage winding shall have quantity (6) 2.5% taps - (2) FCAN and (4) FCBN. Set secondary voltage for 120/208V.",
+      "checkable_value": {"parameter": "transformer_secondary_voltage", "requirement": "120/208V"}
+    }
+  ]
+}
